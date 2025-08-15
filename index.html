@@ -8,19 +8,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Ubuntu -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #4e54c8;
             --secondary: #8f94fb;
             --accent: #ff6b6b;
             --dark: #2c3e50;
-            --light: #ecf0f1;
+            --light: #ffffff;
         }
         
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -34,7 +34,8 @@
         }
         
         .game-font {
-            font-family: 'Press Start 2P', cursive;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 700;
         }
         
         .navbar {
@@ -75,6 +76,7 @@
             border-radius: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
             height: 100%;
+            color: var(--light);
         }
         
         .card:hover {
@@ -119,11 +121,13 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            color: white;
         }
         
         .download-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            color: white;
         }
         
         .os-icon {
@@ -166,6 +170,7 @@
             background: rgba(30, 40, 60, 0.8);
             border-radius: 10px;
             overflow: hidden;
+            color: white;
         }
         
         .param-table th {
@@ -184,6 +189,7 @@
             padding: 20px;
             margin-bottom: 20px;
             border-left: 4px solid var(--accent);
+            color: white;
         }
         
         .editor-guide-step h5 {
@@ -195,6 +201,7 @@
             padding: 30px 0;
             margin-top: 60px;
             border-top: 2px solid var(--accent);
+            color: white;
         }
         
         .pixel-art {
@@ -226,44 +233,44 @@
             text-shadow: 0 0 10px rgba(143, 148, 251, 0.7);
         }
         
-        .blob-character {
-            width: 100px;
-            height: 100px;
-            background: var(--secondary);
-            border-radius: 50%;
-            position: relative;
-            margin: 0 auto 20px;
-            box-shadow: 0 0 20px rgba(143, 148, 251, 0.7);
+        .character-img {
+            width: 150px;
+            height: auto;
+            margin: 0 auto 30px;
+            display: block;
             animation: float 6s ease-in-out infinite;
-        }
-        
-        .blob-character::before {
-            content: "";
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: var(--dark);
-            border-radius: 50%;
-            top: 30px;
-            left: 25px;
-            box-shadow: 40px 0 0 var(--dark);
-        }
-        
-        .blob-character::after {
-            content: "";
-            position: absolute;
-            width: 50px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 0 0 25px 25px;
-            top: 65px;
-            left: 25px;
+            filter: drop-shadow(0 0 15px rgba(143, 148, 251, 0.8));
         }
         
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
+        }
+        
+        /* Better contrast for text */
+        h1, h2, h3, h4, h5, h6 {
+            color: white;
+        }
+        
+        p, li, td {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .text-muted {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .navbar-brand {
+            color: white !important;
         }
     </style>
 </head>
@@ -289,10 +296,10 @@
                         <a class="nav-link" href="#screenshots">Screenshots</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#guide">Level Editor Guide</a>
+                        <a class="nav-link" href="#guide">Level Editor</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#edit-guide">Edit Object Guide</a>
+                        <a class="nav-link" href="#edit-guide">Edit Guide</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#download">Download</a>
@@ -308,7 +315,9 @@
     <!-- Hero Section -->
     <header class="text-center py-5 mt-4">
         <div class="container">
-            <div class="blob-character"></div>
+            <!-- Character Image - Replace with your SVG -->
+            <img src="https://cdn.pixabay.com/photo/2021/08/30/21/29/alien-6587534_960_720.png" alt="Blobseer Character" class="character-img">
+            
             <h1 class="game-font display-3 mb-3 glow">BLOBSEER</h1>
             <p class="lead fs-4 mb-4">Free Platformer Game with Advanced Level Editor</p>
             <div class="d-flex justify-content-center gap-3">
@@ -415,33 +424,39 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="screenshot crt-effect">
-                        <img src="https://via.placeholder.com/600x338/4e54c8/ffffff?text=Gameplay+Screenshot" class="img-fluid rounded" alt="Blobseer Gameplay">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Game Environment">
                     </div>
+                    <p class="text-center">Forest World Environment</p>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="screenshot crt-effect">
-                        <img src="https://via.placeholder.com/600x338/8f94fb/ffffff?text=Level+Editor" class="img-fluid rounded" alt="Level Editor">
+                        <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Level Editor">
                     </div>
+                    <p class="text-center">Level Editor Interface</p>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="screenshot crt-effect">
-                        <img src="https://via.placeholder.com/600x338/ff6b6b/ffffff?text=Boss+Battle" class="img-fluid rounded" alt="Boss Battle">
+                        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Boss Battle">
                     </div>
+                    <p class="text-center">Boss Battle Scene</p>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="screenshot crt-effect">
-                        <img src="https://via.placeholder.com/600x338/2c3e50/ffffff?text=Vehicle+Section" class="img-fluid rounded" alt="Vehicle Section">
+                        <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Vehicle Section">
                     </div>
+                    <p class="text-center">Vehicle Gameplay</p>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="screenshot crt-effect">
-                        <img src="https://via.placeholder.com/600x338/1a2a6c/ffffff?text=Underwater+Area" class="img-fluid rounded" alt="Underwater Area">
+                        <img src="https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Underwater Area">
                     </div>
+                    <p class="text-center">Underwater Exploration</p>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="screenshot crt-effect">
-                        <img src="https://via.placeholder.com/600x338/b21f1f/ffffff?text=Custom+Level" class="img-fluid rounded" alt="Custom Level">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Custom Level">
                     </div>
+                    <p class="text-center">Custom Level Example</p>
                 </div>
             </div>
         </div>
@@ -485,11 +500,6 @@
                     </ol>
                 </div>
                 
-                <div class="editor-guide-step">
-                    <h5><i class="fas fa-expand-alt me-2"></i>View Settings</h5>
-                    <p>Adjust the zoom level in the settings to see more of your level at once. Press 'X' to close the settings dialog.</p>
-                </div>
-                
                 <div class="text-center mt-4">
                     <a href="#edit-guide" class="download-btn">
                         <i class="fas fa-cube me-2"></i>Edit Object Guide
@@ -506,17 +516,34 @@
             <div class="card p-4">
                 <p class="lead text-center">Learn how to edit object properties in the Level Editor</p>
                 
-                <h4 class="mt-4 mb-3">Common Edit Dialog Features</h4>
-                <ul>
-                    <li>Select an object and click "Edit" to open properties dialog</li>
-                    <li>When multiple objects of the same type are selected, changes apply to all</li>
-                    <li>Dialog title shows plural 's' when editing multiple objects</li>
-                    <li>Different objects have different property sets</li>
-                </ul>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card p-3 mb-4">
+                            <h4><i class="fas fa-object-group me-2"></i>Basic Editing</h4>
+                            <ul>
+                                <li>Select an object and click "Edit" to open properties</li>
+                                <li>Changes apply to all selected objects of the same type</li>
+                                <li>Dialog title shows plural when editing multiple objects</li>
+                                <li>Different objects have unique property sets</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-3 mb-4">
+                            <h4><i class="fas fa-code me-2"></i>Visual Scripting</h4>
+                            <ul>
+                                <li>Create sequences of actions with VisualScript objects</li>
+                                <li>Add, remove, and reorder actions</li>
+                                <li>Set execution modes: Move, Edit, Delete</li>
+                                <li>Import predefined actions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 
-                <h4 class="mt-5 mb-3">Object Type Parameters</h4>
+                <h4 class="mt-4 mb-3">Object Parameters Reference</h4>
                 
-                <div class="param-table">
+                <div class="table-responsive param-table">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -540,18 +567,6 @@
                                 <td>Any valid metal bar ID</td>
                             </tr>
                             <tr>
-                                <td>Metal Bar</td>
-                                <td>Metal Bar Chain Index</td>
-                                <td>Integer</td>
-                                <td>Unique identifier</td>
-                            </tr>
-                            <tr>
-                                <td>Switch</td>
-                                <td>Target Grass Spike Group Index</td>
-                                <td>Integer</td>
-                                <td>Any valid spike group ID</td>
-                            </tr>
-                            <tr>
                                 <td>Moving Platform</td>
                                 <td>Move X, Move Y, Speed</td>
                                 <td>Float</td>
@@ -564,14 +579,8 @@
                                 <td>Seconds >0</td>
                             </tr>
                             <tr>
-                                <td>Enemy</td>
-                                <td>Speed, Animation Group</td>
-                                <td>Float, Integer</td>
-                                <td>Speed >0, Group ID</td>
-                            </tr>
-                            <tr>
                                 <td>CRT Shader</td>
-                                <td>Scanlines, Distortion, Noise, etc.</td>
+                                <td>Scanlines, Distortion, Noise</td>
                                 <td>Float, Boolean</td>
                                 <td>Multi-page configuration</td>
                             </tr>
@@ -581,35 +590,14 @@
                                 <td>Integer, Float</td>
                                 <td>Group ID, Scale >0, Time >0</td>
                             </tr>
+                            <tr>
+                                <td>Tween Action</td>
+                                <td>Target Group, Property, Duration</td>
+                                <td>Integer, String, Float</td>
+                                <td>Group ID, Duration >0</td>
+                            </tr>
                         </tbody>
                     </table>
-                </div>
-                
-                <h4 class="mt-5 mb-3">Visual Script Editing</h4>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card p-3 mb-3">
-                            <h5>VisualScript Object</h5>
-                            <p>When editing a VisualScript object, a specialized dialog appears allowing you to create sequences of actions.</p>
-                            <ul>
-                                <li>Add, remove, and reorder actions</li>
-                                <li>Set execution modes: Move, Edit, Delete</li>
-                                <li>Import predefined actions</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card p-3 mb-3">
-                            <h5>Tween Actions</h5>
-                            <p>When adding a Tween action to a VisualScript, a dialog opens with these properties:</p>
-                            <ul>
-                                <li>Target Object Group</li>
-                                <li>Property to animate (position, scale, etc.)</li>
-                                <li>Start and end values</li>
-                                <li>Duration and easing functions</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 
                 <div class="text-center mt-4">
@@ -720,7 +708,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Playtester counter animation
             const counterElement = document.getElementById('playtester-counter');
-            const targetCount = 1247;
+            let targetCount = 1247;
             let currentCount = 1000;
             const duration = 3000;
             const increment = (targetCount - currentCount) / (duration / 16);
