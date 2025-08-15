@@ -232,7 +232,22 @@
         .glow {
             text-shadow: 0 0 10px rgba(143, 148, 251, 0.7);
         }
-
+        
+        .character-img {
+            width: 150px;
+            height: auto;
+            margin: 0 auto 30px;
+            display: block;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(143, 148, 251, 0.8));
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
         /* Better contrast for text */
         h1, h2, h3, h4, h5, h6 {
             color: white;
@@ -301,11 +316,7 @@
     <header class="text-center py-5 mt-4">
         <div class="container">
             <!-- Character Image - Replace with your SVG -->
-            <div class="sprite-animation">
-                <img src="assets/blob sprite.svg" alt="Frame 1">
-                <img src="assets/blob sprite 2.svg" alt="Frame 2">
-                <img src="assets/blob sprite 3.svg" alt="Frame 3">
-            </div>
+            <img src="assets/blob sprite.svg" class="character-img"></img>
             
             <h1 class="game-font display-3 mb-3 glow">BLOBSEER</h1>
             <p class="lead fs-4 mb-4">Free Platformer Game with Advanced Level Editor</p>
