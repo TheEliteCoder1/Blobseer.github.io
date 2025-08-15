@@ -1,1 +1,754 @@
-ECHO is on.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blobseer - Free Platformer Game with Level Editor</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --accent: #ff6b6b;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--light);
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .game-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .navbar {
+            background: rgba(44, 62, 80, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .section {
+            padding: 80px 0;
+            background: rgba(25, 42, 86, 0.85);
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .card {
+            background: rgba(30, 40, 60, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent);
+        }
+        
+        .card-title {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .screenshot {
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .screenshot:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .os-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+        
+        .counter {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+        
+        .discord-btn {
+            background: #5865F2;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .discord-btn:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .discord-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+        
+        .param-table {
+            background: rgba(30, 40, 60, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .param-table th {
+            background: rgba(78, 84, 200, 0.7);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .param-table tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .editor-guide-step {
+            background: rgba(30, 40, 60, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .editor-guide-step h5 {
+            color: var(--secondary);
+        }
+        
+        .footer {
+            background: rgba(44, 62, 80, 0.9);
+            padding: 30px 0;
+            margin-top: 60px;
+            border-top: 2px solid var(--accent);
+        }
+        
+        .pixel-art {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+        
+        /* Retro CRT effect for screenshots */
+        .crt-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .crt-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(143, 148, 251, 0.7);
+        }
+        
+        .blob-character {
+            width: 100px;
+            height: 100px;
+            background: var(--secondary);
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 20px rgba(143, 148, 251, 0.7);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .blob-character::before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--dark);
+            border-radius: 50%;
+            top: 30px;
+            left: 25px;
+            box-shadow: 40px 0 0 var(--dark);
+        }
+        
+        .blob-character::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 0 0 25px 25px;
+            top: 65px;
+            left: 25px;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand game-font glow" href="#">
+                <i class="fas fa-ghost me-2"></i>BLOBSEER
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#screenshots">Screenshots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#guide">Level Editor Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#edit-guide">Edit Object Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#download">Download</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#community">Community</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="text-center py-5 mt-4">
+        <div class="container">
+            <div class="blob-character"></div>
+            <h1 class="game-font display-3 mb-3 glow">BLOBSEER</h1>
+            <p class="lead fs-4 mb-4">Free Platformer Game with Advanced Level Editor</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#download" class="download-btn">
+                    <i class="fas fa-download me-2"></i>Download Now
+                </a>
+                <a href="#guide" class="download-btn" style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e);">
+                    <i class="fas fa-book me-2"></i>Editor Guide
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="text-center section-title game-font">ABOUT THE GAME</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card p-4">
+                        <p class="lead">Blobseer is a free 2D platformer game with no ads and an advanced in-game level editor. Explore diverse worlds, overcome challenges, and create your own levels with the powerful editor tools.</p>
+                        
+                        <p>Currently in development, Blobseer already offers:</p>
+                        <ul>
+                            <li>12 progressively challenging levels in the Forest Sailors world</li>
+                            <li>A comprehensive level editor with object manipulation tools</li>
+                            <li>Multiple power-ups and game mechanics</li>
+                            <li>Visual effects and shaders for enhanced gameplay</li>
+                        </ul>
+                        
+                        <p><strong>Note:</strong> Some features are still in development and will be marked as "Coming Soon" in-game.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="text-center section-title game-font">GAME FEATURES</h2>
+            <div class="row">
+                <!-- Feature 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center p-4">
+                        <i class="fas fa-edit feature-icon"></i>
+                        <h3 class="card-title">Advanced Level Editor</h3>
+                        <p>Create custom levels with powerful editing tools, object manipulation, and visual scripting.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center p-4">
+                        <i class="fas fa-dungeon feature-icon"></i>
+                        <h3 class="card-title">Multiple Worlds</h3>
+                        <p>Explore the Forest Sailors world with 12 progressively challenging levels.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center p-4">
+                        <i class="fas fa-bolt feature-icon"></i>
+                        <h3 class="card-title">Power-ups & Mechanics</h3>
+                        <p>Trampolines, power-ups, vehicles, gravity manipulation, and more!</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center p-4">
+                        <i class="fas fa-ghost feature-icon"></i>
+                        <h3 class="card-title">Enemies & Bosses</h3>
+                        <p>Face Forest Sailor Minions, Pufferfish, Captains, and the Evil Forest Sailor Lords boss.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center p-4">
+                        <i class="fas fa-cubes feature-icon"></i>
+                        <h3 class="card-title">Diverse Objects</h3>
+                        <p>Over 100 static, moveable, and decorative objects to use in your levels.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center p-4">
+                        <i class="fas fa-magic feature-icon"></i>
+                        <h3 class="card-title">Visual Effects</h3>
+                        <p>CRT, Ray, Vignette, Wave, and Radial Blur shaders to enhance visual experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="section">
+        <div class="container">
+            <h2 class="text-center section-title game-font">SCREENSHOTS</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="screenshot crt-effect">
+                        <img src="https://via.placeholder.com/600x338/4e54c8/ffffff?text=Gameplay+Screenshot" class="img-fluid rounded" alt="Blobseer Gameplay">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="screenshot crt-effect">
+                        <img src="https://via.placeholder.com/600x338/8f94fb/ffffff?text=Level+Editor" class="img-fluid rounded" alt="Level Editor">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="screenshot crt-effect">
+                        <img src="https://via.placeholder.com/600x338/ff6b6b/ffffff?text=Boss+Battle" class="img-fluid rounded" alt="Boss Battle">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="screenshot crt-effect">
+                        <img src="https://via.placeholder.com/600x338/2c3e50/ffffff?text=Vehicle+Section" class="img-fluid rounded" alt="Vehicle Section">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="screenshot crt-effect">
+                        <img src="https://via.placeholder.com/600x338/1a2a6c/ffffff?text=Underwater+Area" class="img-fluid rounded" alt="Underwater Area">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="screenshot crt-effect">
+                        <img src="https://via.placeholder.com/600x338/b21f1f/ffffff?text=Custom+Level" class="img-fluid rounded" alt="Custom Level">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Level Editor Guide -->
+    <section id="guide" class="section">
+        <div class="container">
+            <h2 class="text-center section-title game-font">LEVEL EDITOR GUIDE</h2>
+            <div class="card p-4 mb-4">
+                <h3 class="text-center mb-4">Create and Customize Your Own Levels</h3>
+                
+                <div class="editor-guide-step">
+                    <h5><i class="fas fa-plus-circle me-2"></i>Creating a New Level</h5>
+                    <ol>
+                        <li>From the Main Menu, click on the "More Fun Things" button (Building Tools icon)</li>
+                        <li>Click on the "Level Editor" button</li>
+                        <li>Give your level a name (minimum 5 characters)</li>
+                        <li>Enter an optional description</li>
+                        <li>Press the "Create Level" button (Building Tools icon)</li>
+                    </ol>
+                </div>
+                
+                <div class="editor-guide-step">
+                    <h5><i class="fas fa-save me-2"></i>Saving Your Level</h5>
+                    <p>Your level is automatically saved when you close the game or use the pause menu options. You can also manually save through the pause menu.</p>
+                </div>
+                
+                <div class="editor-guide-step">
+                    <h5><i class="fas fa-folder-open me-2"></i>Accessing Existing Levels</h5>
+                    <ol>
+                        <li>From the Main Menu, click on "My Levels" (not the Level Editor button)</li>
+                        <li>Browse through your created levels (5 per page)</li>
+                        <li>Use the action buttons:
+                            <ul>
+                                <li><strong>Edit</strong>: Return to the editor</li>
+                                <li><strong>Play</strong>: Test your level</li>
+                                <li><strong>Delete</strong>: Remove the level (with confirmation)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="editor-guide-step">
+                    <h5><i class="fas fa-expand-alt me-2"></i>View Settings</h5>
+                    <p>Adjust the zoom level in the settings to see more of your level at once. Press 'X' to close the settings dialog.</p>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="#edit-guide" class="download-btn">
+                        <i class="fas fa-cube me-2"></i>Edit Object Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Edit Object Guide -->
+    <section id="edit-guide" class="section">
+        <div class="container">
+            <h2 class="text-center section-title game-font">EDIT OBJECT GUIDE</h2>
+            <div class="card p-4">
+                <p class="lead text-center">Learn how to edit object properties in the Level Editor</p>
+                
+                <h4 class="mt-4 mb-3">Common Edit Dialog Features</h4>
+                <ul>
+                    <li>Select an object and click "Edit" to open properties dialog</li>
+                    <li>When multiple objects of the same type are selected, changes apply to all</li>
+                    <li>Dialog title shows plural 's' when editing multiple objects</li>
+                    <li>Different objects have different property sets</li>
+                </ul>
+                
+                <h4 class="mt-5 mb-3">Object Type Parameters</h4>
+                
+                <div class="param-table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Object Type</th>
+                                <th>Properties</th>
+                                <th>Type</th>
+                                <th>Range/Values</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Portal</td>
+                                <td>Target Portal Exit Index</td>
+                                <td>Integer</td>
+                                <td>Any valid portal ID</td>
+                            </tr>
+                            <tr>
+                                <td>Key</td>
+                                <td>Target Metal Bar Chain Index</td>
+                                <td>Integer</td>
+                                <td>Any valid metal bar ID</td>
+                            </tr>
+                            <tr>
+                                <td>Metal Bar</td>
+                                <td>Metal Bar Chain Index</td>
+                                <td>Integer</td>
+                                <td>Unique identifier</td>
+                            </tr>
+                            <tr>
+                                <td>Switch</td>
+                                <td>Target Grass Spike Group Index</td>
+                                <td>Integer</td>
+                                <td>Any valid spike group ID</td>
+                            </tr>
+                            <tr>
+                                <td>Moving Platform</td>
+                                <td>Move X, Move Y, Speed</td>
+                                <td>Float</td>
+                                <td>X/Y: Position, Speed: >0</td>
+                            </tr>
+                            <tr>
+                                <td>Rotating Platform</td>
+                                <td>Rotation Duration</td>
+                                <td>Float</td>
+                                <td>Seconds >0</td>
+                            </tr>
+                            <tr>
+                                <td>Enemy</td>
+                                <td>Speed, Animation Group</td>
+                                <td>Float, Integer</td>
+                                <td>Speed >0, Group ID</td>
+                            </tr>
+                            <tr>
+                                <td>CRT Shader</td>
+                                <td>Scanlines, Distortion, Noise, etc.</td>
+                                <td>Float, Boolean</td>
+                                <td>Multi-page configuration</td>
+                            </tr>
+                            <tr>
+                                <td>Scale Action</td>
+                                <td>Target Group, X/Y Scale, Time</td>
+                                <td>Integer, Float</td>
+                                <td>Group ID, Scale >0, Time >0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4 class="mt-5 mb-3">Visual Script Editing</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card p-3 mb-3">
+                            <h5>VisualScript Object</h5>
+                            <p>When editing a VisualScript object, a specialized dialog appears allowing you to create sequences of actions.</p>
+                            <ul>
+                                <li>Add, remove, and reorder actions</li>
+                                <li>Set execution modes: Move, Edit, Delete</li>
+                                <li>Import predefined actions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-3 mb-3">
+                            <h5>Tween Actions</h5>
+                            <p>When adding a Tween action to a VisualScript, a dialog opens with these properties:</p>
+                            <ul>
+                                <li>Target Object Group</li>
+                                <li>Property to animate (position, scale, etc.)</li>
+                                <li>Start and end values</li>
+                                <li>Duration and easing functions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="https://www.youtube.com/playlist?list=PL1BXPEpF6Q2c5lJwa2oyM7eLASInvbbzN" target="_blank" class="download-btn" style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e);">
+                        <i class="fab fa-youtube me-2"></i>Watch Video Tutorials
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="section">
+        <div class="container">
+            <h2 class="text-center section-title game-font">DOWNLOAD</h2>
+            
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card p-5 text-center">
+                        <!-- Playtester Counter -->
+                        <div class="mb-5">
+                            <h4>Current Playtesters</h4>
+                            <div class="counter" id="playtester-counter">1,247</div>
+                            <p class="text-muted">Join our growing community!</p>
+                        </div>
+                        
+                        <h3 class="mb-4">Download Blobseer Now</h3>
+                        <p class="lead mb-4">Available for Windows and Linux</p>
+                        
+                        <div class="row">
+                            <!-- Windows Download -->
+                            <div class="col-md-6 mb-4">
+                                <div class="card p-4 h-100">
+                                    <i class="fab fa-windows os-icon"></i>
+                                    <h4>Windows</h4>
+                                    <p class="mb-3">Blobseer-Windows.exe</p>
+                                    <a href="#" class="download-btn">
+                                        <i class="fas fa-download me-2"></i>Download
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Linux Download -->
+                            <div class="col-md-6 mb-4">
+                                <div class="card p-4 h-100">
+                                    <i class="fab fa-linux os-icon"></i>
+                                    <h4>Linux</h4>
+                                    <p class="mb-3">Blobseer-Linux.x86_64</p>
+                                    <a href="#" class="download-btn">
+                                        <i class="fas fa-download me-2"></i>Download
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <p><small>Version 0.8.3 | 85 MB | Free with no ads</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="section">
+        <div class="container">
+            <h2 class="text-center section-title game-font">JOIN OUR COMMUNITY</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card p-5 text-center">
+                        <h3 class="mb-4">Connect with Other Players</h3>
+                        <p class="lead mb-4">Share levels, get help, and suggest features</p>
+                        
+                        <a href="https://discord.gg/blobseer" class="discord-btn mx-auto">
+                            <i class="fab fa-discord discord-icon"></i> Join Our Discord Server
+                        </a>
+                        
+                        <div class="mt-5">
+                            <h4>Have Feedback?</h4>
+                            <p>We're actively developing Blobseer and appreciate your input!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="mb-3">
+                <a href="#" class="text-white me-3"><i class="fab fa-discord fa-lg"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-youtube fa-lg"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-github fa-lg"></i></a>
+            </div>
+            <p class="mb-2">Blobseer &copy; 2023 - Free Platformer Game with Level Editor</p>
+            <p class="mb-0">No ads, no microtransactions - just fun gameplay and creativity!</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Simple counter animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Playtester counter animation
+            const counterElement = document.getElementById('playtester-counter');
+            const targetCount = 1247;
+            let currentCount = 1000;
+            const duration = 3000;
+            const increment = (targetCount - currentCount) / (duration / 16);
+            
+            const counterInterval = setInterval(() => {
+                currentCount += increment;
+                counterElement.textContent = Math.floor(currentCount).toLocaleString();
+                
+                if (currentCount >= targetCount) {
+                    counterElement.textContent = targetCount.toLocaleString();
+                    clearInterval(counterInterval);
+                }
+            }, 16);
+            
+            // Increment counter when download links are clicked
+            const downloadLinks = document.querySelectorAll('.download-btn[href="#"]');
+            downloadLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    targetCount = parseInt(counterElement.textContent.replace(/,/g, '')) + 1;
+                    currentCount = parseInt(counterElement.textContent.replace(/,/g, ''));
+                    counterElement.textContent = targetCount.toLocaleString();
+                    
+                    // Show download message
+                    alert('Download starting... In a real implementation, this would download the game files.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
