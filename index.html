@@ -90,19 +90,6 @@
             font-weight: 700;
         }
         
-        .screenshot {
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-        }
-        
-        .screenshot:hover {
-            transform: scale(1.03);
-            border-color: var(--accent);
-        }
-        
         .feature-icon {
             font-size: 2.5rem;
             color: var(--secondary);
@@ -209,26 +196,8 @@
             image-rendering: -moz-crisp-edges;
             image-rendering: crisp-edges;
         }
-        
-        /* Retro CRT effect for screenshots */
-        .crt-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .crt-effect::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-        }
-        
+    
+
         .glow {
             text-shadow: 0 0 10px rgba(143, 148, 251, 0.7);
         }
@@ -301,13 +270,7 @@
                         <a class="nav-link" href="#features">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#screenshots">Screenshots</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#guide">Level Editor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#edit-guide">Edit Guide</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#download">Download</a>
@@ -423,52 +386,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Screenshots Section -->
-    <section id="screenshots" class="section">
-        <div class="container">
-            <h2 class="text-center section-title game-font">SCREENSHOTS</h2>
-            <div class="row">
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="screenshot crt-effect">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Game Environment">
-                    </div>
-                    <p class="text-center">Forest World Environment</p>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="screenshot crt-effect">
-                        <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Level Editor">
-                    </div>
-                    <p class="text-center">Level Editor Interface</p>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="screenshot crt-effect">
-                        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Boss Battle">
-                    </div>
-                    <p class="text-center">Boss Battle Scene</p>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="screenshot crt-effect">
-                        <img src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Vehicle Section">
-                    </div>
-                    <p class="text-center">Vehicle Gameplay</p>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="screenshot crt-effect">
-                        <img src="https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Underwater Area">
-                    </div>
-                    <p class="text-center">Underwater Exploration</p>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="screenshot crt-effect">
-                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=338&q=80" class="img-fluid rounded" alt="Custom Level">
-                    </div>
-                    <p class="text-center">Custom Level Example</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Level Editor Guide -->
     <section id="guide" class="section">
         <div class="container">
@@ -506,114 +423,12 @@
                         </li>
                     </ol>
                 </div>
-                
-                <div class="text-center mt-4">
-                    <a href="#edit-guide" class="download-btn">
-                        <i class="fas fa-cube me-2"></i>Edit Object Guide
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Edit Object Guide -->
-    <section id="edit-guide" class="section">
-        <div class="container">
-            <h2 class="text-center section-title game-font">EDIT OBJECT GUIDE</h2>
-            <div class="card p-4">
-                <p class="lead text-center">Learn how to edit object properties in the Level Editor</p>
-                
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <div class="card p-3 mb-4">
-                            <h4><i class="fas fa-object-group me-2"></i>Basic Editing</h4>
-                            <ul>
-                                <li>Select an object and click "Edit" to open properties</li>
-                                <li>Changes apply to all selected objects of the same type</li>
-                                <li>Dialog title shows plural when editing multiple objects</li>
-                                <li>Different objects have unique property sets</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card p-3 mb-4">
-                            <h4><i class="fas fa-code me-2"></i>Visual Scripting</h4>
-                            <ul>
-                                <li>Create sequences of actions with VisualScript objects</li>
-                                <li>Add, remove, and reorder actions</li>
-                                <li>Set execution modes: Move, Edit, Delete</li>
-                                <li>Import predefined actions</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <h4 class="mt-4 mb-3">Object Parameters Reference</h4>
-                
-                <div class="table-responsive param-table">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Object Type</th>
-                                <th>Properties</th>
-                                <th>Type</th>
-                                <th>Range/Values</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Portal</td>
-                                <td>Target Portal Exit Index</td>
-                                <td>Integer</td>
-                                <td>Any valid portal ID</td>
-                            </tr>
-                            <tr>
-                                <td>Key</td>
-                                <td>Target Metal Bar Chain Index</td>
-                                <td>Integer</td>
-                                <td>Any valid metal bar ID</td>
-                            </tr>
-                            <tr>
-                                <td>Moving Platform</td>
-                                <td>Move X, Move Y, Speed</td>
-                                <td>Float</td>
-                                <td>X/Y: Position, Speed: >0</td>
-                            </tr>
-                            <tr>
-                                <td>Rotating Platform</td>
-                                <td>Rotation Duration</td>
-                                <td>Float</td>
-                                <td>Seconds >0</td>
-                            </tr>
-                            <tr>
-                                <td>CRT Shader</td>
-                                <td>Scanlines, Distortion, Noise</td>
-                                <td>Float, Boolean</td>
-                                <td>Multi-page configuration</td>
-                            </tr>
-                            <tr>
-                                <td>Scale Action</td>
-                                <td>Target Group, X/Y Scale, Time</td>
-                                <td>Integer, Float</td>
-                                <td>Group ID, Scale >0, Time >0</td>
-                            </tr>
-                            <tr>
-                                <td>Tween Action</td>
-                                <td>Target Group, Property, Duration</td>
-                                <td>Integer, String, Float</td>
-                                <td>Group ID, Duration >0</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
                 <div class="text-center mt-4">
                     <a href="https://www.youtube.com/playlist?list=PL1BXPEpF6Q2c5lJwa2oyM7eLASInvbbzN" target="_blank" class="download-btn" style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e);">
                         <i class="fab fa-youtube me-2"></i>Watch Video Tutorials
                     </a>
                 </div>
-            </div>
-        </div>
     </section>
 
     <!-- Download Section -->
